@@ -117,7 +117,7 @@ https://access.redhat.com/documentation/en/red-hat-mobile-application-platform/4
 1. MongoDB
 
 - Edit 1st MBaaS template to only use 25Gi per MongoDB node
-- Run template ( [fh-mbaas-template-3node-1.json](/Users/mmetting/RedHat/tmp/OSCP/mbaas-templates/fh-mbaas-template-3node-1.json) ) deployment
+- Run template ( [fh-mbaas-template-3node-1.json](./mbaas-templates/fh-mbaas-template-3node-1.json) ) deployment
 
 ```
 oc new-app -f fh-mbaas-template-3node-1.json \
@@ -132,7 +132,7 @@ oc new-app -f fh-mbaas-template-3node-1.json \
 
 2. Mongo Initiator
 
-- Run template ( [fh-mbaas-template-3node-2.json](/Users/mmetting/RedHat/tmp/OSCP/mbaas-templates/fh-mbaas-template-3node-2.json) ) deployment
+- Run template ( [fh-mbaas-template-3node-2.json](./mbaas-templates/fh-mbaas-template-3node-2.json) ) deployment
 
 ```
 oc new-app -f fh-mbaas-template-3node-2.json \
@@ -147,7 +147,7 @@ oc new-app -f fh-mbaas-template-3node-2.json \
 
 3. Rest of MBaaS
 
-- Run template ( [fh-mbaas-template-3node-3.json](/Users/mmetting/RedHat/tmp/OSCP/mbaas-templates/fh-mbaas-template-3node-3.json) ) deployment
+- Run template ( [fh-mbaas-template-3node-3.json](./mbaas-templates/fh-mbaas-template-3node-3.json) ) deployment
 
 ```
 oc new-app -f fh-mbaas-template-3node-3.json \
