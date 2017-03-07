@@ -1,0 +1,312 @@
+{
+  "kind": "Template",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "fh-mbaas",
+    "annotations": {
+      "templateVersion": "0.24.66-redhat-1",
+      "description": "Red Hat Mobile Backend as a Service template",
+      "iconClass": "icon-nodejs"
+    }
+  },
+  "objects": [
+	{
+      "kind": "Pod",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "mongodb-initiator",
+        "labels": {
+          "name": "mongodb-initiator"
+        }
+      },
+      "spec": {
+        "containers": [
+          {
+            "name": "mongodb",
+            "image": "${MONGODB_IMAGE}:${MONGODB_IMAGE_VERSION}",
+            "ports": [
+              {
+                "containerPort": 27017
+              }
+            ],
+            "command": [
+              "run-mongod",
+              "initiate"
+            ],
+            "env": [
+              {
+                "name": "METADATA_NAMESPACE",
+                "valueFrom": {
+                  "fieldRef": {
+                    "fieldPath": "metadata.namespace"
+                  }
+                }
+              },
+              {
+                "name": "MONGODB_REPLICA_NAME",
+                "value": "${MONGODB_REPLICA_NAME}"
+              },
+              {
+                "name": "MONGODB_SERVICE_NAME",
+                "value": "mongodb"
+              },
+              {
+                "name": "MONGODB_KEYFILE_VALUE",
+                "value": "${MONGODB_KEYFILE_VALUE}"
+              },
+              {
+                "name": "MONGODB_FHMBAAS_USER",
+                "value": "${MONGODB_FHMBAAS_USER}"
+              },
+              {
+                "name": "MONGODB_FHMBAAS_PASSWORD",
+                "value": "${MONGODB_FHMBAAS_PASSWORD}"
+              },
+              {
+                "name": "MONGODB_FHMBAAS_DATABASE",
+                "value": "fh-mbaas"
+              },
+              {
+                "name": "FHMBAAS_KEY",
+                "value": "${FHMBAAS_KEY}"
+              },
+              {
+                "name": "MONGODB_ADMIN_PASSWORD",
+                "value": "${MONGODB_ADMIN_PASSWORD}"
+              },
+              {
+                "name": "MONGODB_FHREPORTING_USER",
+                "value": "${MONGODB_FHREPORTING_USER}"
+              },
+              {
+                "name": "MONGODB_FHREPORTING_PASSWORD",
+                "value": "${MONGODB_FHREPORTING_PASSWORD}"
+              },
+              {
+                "name": "MONGODB_FHREPORTING_DATABASE",
+                "value": "fh-reporting"
+              },
+              {
+                "name": "ENDPOINT_COUNT",
+                "value": "${ENDPOINT_COUNT}"
+              },
+              {
+                "name": "MONGODB_INITIAL_REPLICA_COUNT",
+                "value": "${ENDPOINT_COUNT}"
+              }
+            ],
+            "imagePullPolicy": "IfNotPresent"
+          }
+        ],
+        "restartPolicy": "Never"
+      }
+    }
+  ],
+  "parameters": [
+    {
+      "name": "FH_CLUSTER",
+      "value": "development",
+      "description": "the name of the cluster the mbaas was created from"
+    },
+    {
+      "name": "FH_MBAASID",
+      "description": "id of the mbaas generated.",
+      "value": "xdoonC5nF1YbQJRUTV2G"
+    },
+    {
+      "name": "MONGODB_FHMBAAS_USER",
+      "value": "u-mbaas",
+      "description": "The MongoDB user name"
+    },
+    {
+      "name": "MONGODB_FHMBAAS_PASSWORD",
+      "description": "The MongoDB password",
+      "value": "qJJHay6NGFIDHbUB0oVbklCkiOQdCabyKCL2hHOe"
+    },
+    {
+      "name": "FHMBAAS_KEY",
+      "description": "The MBaaS key",
+      "value": "tYb2HPF0Nv4RdQydknkfKdEwWnaW4YYYTOFm4MEu"
+    },
+    {
+      "name": "MONGODB_KEYFILE_VALUE",
+      "description": "The value of the MongoDB Key",
+      "value": "PMdQBYnK0x1RD85jDuBA5PDuHtFle5wtct3JPeAXE2M8e15IksCpH15wmuapuOjLqWcysmP0A0i0K3qEHqEsRse6KfVSM4rnf3YX4y3FI4ULRaCTp6fVI0M1nrSwtpwnsI4iAjOOHrE5R8KwWOrfSsOPbRFh6H527rHHbTS5cO7l6tDrgivmcugrRpfBEvemrJmVQ70obiUxfXwdiGSlBUICf8IYNRDLRd5yokTmJYU8k0xYY73UDuuiw1AxXqX"
+    },
+    {
+      "name": "MONGODB_ADMIN_PASSWORD",
+      "description": "The MongoDB Admin password",
+      "value": "Q0tDk1b6w4kcD2pS2MRVgoF5jCjaWV72IHqgNvTr"
+    },
+    {
+      "name": "MONGODB_FHREPORTING_USER",
+      "value": "u-reporting",
+      "description": "The Reporting user name"
+    },
+    {
+      "name": "MONGODB_FHREPORTING_PASSWORD",
+      "description": "The MongoDB Reporting password",
+      "value": "NKMRRfXXcC03cKLTR4HeRaJWfJEKxW2mwNOXtACq"
+    },
+    {
+      "name": "FH_MBAAS_IMAGE",
+      "value": "rhmap42/fh-mbaas",
+      "description": "The name of the fh-mbaas image"
+    },
+    {
+      "name": "FH_MBAAS_IMAGE_VERSION",
+      "value": "5.2.4-2",
+      "description": "The version for the FH_MBAAS_IMAGE"
+    },
+    {
+      "name": "FH_MESSAGING_IMAGE",
+      "value": "rhmap42/fh-messaging",
+      "description": "The name of the fh-messaging image"
+    },
+    {
+      "name": "FH_MESSAGING_IMAGE_VERSION",
+      "value": "3.0.1-5",
+      "description": "The version for the FH_MESSAGING_IMAGE"
+    },
+    {
+      "name": "FH_METRICS_IMAGE",
+      "value": "rhmap42/fh-metrics",
+      "description": "The name of the fh-metrics image"
+    },
+    {
+      "name": "FH_METRICS_IMAGE_VERSION",
+      "value": "3.0.1-6",
+      "description": "The version for the FH_METRICS_IMAGE"
+    },
+    {
+      "name": "FH_STATSD_IMAGE",
+      "value": "rhmap42/fh-statsd",
+      "description": "The name of the fh-statsd image"
+    },
+    {
+      "name": "FH_STATSD_IMAGE_VERSION",
+      "value": "2.0.2-3",
+      "description": "The version for the FH_STATSD_IMAGE"
+    },
+    {
+      "name": "MONGODB_IMAGE",
+      "value": "rhmap42/mongodb",
+      "description": "The name of the mongodb image"
+    },
+    {
+      "name": "MONGODB_IMAGE_VERSION",
+      "value": "3.2-11",
+      "description": "The version for the MONGODB_IMAGE"
+    },
+    {
+      "name": "FH_MESSAGING_API_KEY",
+      "description": "Key for communicating with the FH_MESSAGING Service",
+      "value": "qEvUsVoljKJV3m11Wcd8Y7Nekvw2fUDDnxYx0riC"
+    },
+    {
+      "name": "FH_METRICS_API_KEY",
+      "description": "Key for communicating with the FH_METRICS Service",
+      "value": "etYL6MBiVscycy5kdRYdTs5lxdbPUMtv15Xfe0MX"
+    },
+    {
+      "name": "MBAAS_ROUTER_DNS",
+      "description": "The DNS name for the MBaaS Router",
+      "value": ""
+    },
+    {
+      "name": "ENDPOINT_COUNT",
+      "description": "The amount of database's to create a replica set",
+      "value": "3"
+    },
+    {
+      "name": "FH_MBAAS_REPLICAS",
+      "description": "Replica used for sizing",
+      "value": "3"
+    },
+    {
+      "name": "FH_MESSAGING_REPLICAS",
+      "description": "Replica used for sizing",
+      "value": "3"
+    },
+    {
+      "name": "FH_METRICS_REPLICAS",
+      "description": "Replica used for sizing",
+      "value": "3"
+    },
+    {
+      "name": "FH_STATSD_API_KEY",
+      "description": "Key for communicating with the FH_STATSD Service",
+      "value": "dDEYyPhd8i3IfhiunmkFGNhsVGeSUI7xlM3NpgfP"
+    },
+    {
+      "name": "FH_DEFAULT_LOG_LEVEL",
+      "description": "A default log level for all MBaaS components",
+      "value": "info"
+    },
+    {
+      "name": "SMTP_SERVER",
+      "description": "SMTP server address to use for sending alert emails e.g. 1.2.3.4:25",
+      "value": ""
+    },
+    {
+      "name": "SMTP_USERNAME",
+      "description": "SMTP username",
+      "value": ""
+    },
+    {
+      "name": "SMTP_PASSWORD",
+      "description": "SMTP password",
+      "value": "password"
+    },
+    {
+      "name": "SMTP_TLS",
+      "description": "Use TLS for message delivery (auto|yes|no)",
+      "value": "no"
+    },
+    {
+      "name": "SMTP_FROM_ADDRESS",
+      "description": "From email address for alerts",
+      "value": "admin@example.com"
+    },
+    {
+      "name": "ADMIN_EMAIL",
+      "description": "To email address for alerts",
+      "value": "root@localhost"
+    },
+    {
+      "name": "NAGIOS_USER",
+      "description": "Nagios admin username",
+      "value": "nagiosadmin"
+    },
+    {
+      "name": "NAGIOS_PASSWORD",
+      "description": "Nagios admin user password",
+      "value": "jjUj16wFKW"
+    },
+    {
+      "name": "RHMAP_ROUTER_DNS",
+      "description": "Host or Service name for RHMAP",
+      "value": "localhost"
+    },
+    {
+      "name": "RHMAP_HOSTGROUPS",
+      "description": "RHMAP hostgroups being monitored (core|mbaas|core,mbaas)",
+      "value": "mbaas"
+    },
+    {
+      "name": "NAGIOS_IMAGE",
+      "description": "The name of the Nagios Docker image",
+      "value": "rhmap42/nagios"
+    },
+    {
+      "name": "NAGIOS_IMAGE_VERSION",
+      "description": "The version of the Nagios Docker image",
+      "value": "4.0.8-27"
+    },
+    {
+      "name": "MONGODB_REPLICA_NAME",
+      "description": "The mongodb replicaset name",
+      "value": "rs0"
+    }
+  ]
+}
