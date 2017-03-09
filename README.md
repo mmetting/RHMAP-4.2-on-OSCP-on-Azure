@@ -106,6 +106,7 @@ sudo vi /opt/rhmap/templates/core/fh-core-backend.json
 ```
 
 > Continue at 1.2.2.5. Set Up Back End Components
+
 > Change millicore dc to use http for Git
 
 ## Install MBaaS
